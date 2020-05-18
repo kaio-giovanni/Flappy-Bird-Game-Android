@@ -56,7 +56,7 @@ public class Assets
 
         foregroundRegion      = new TextureRegion(spriteSheet, 292 , 0  , 168, 57);
 
-        scoreRegion           = new TextureRegion(spriteSheet, 3   , 259, 112, 57);
+        scoreRegion           = new TextureRegion(spriteSheet, 3   , 259, 113, 57);
 
         logo  				  = new TextureRegion(spriteSheet, 349 , 89 , 92 , 29);
         playRegion            = new TextureRegion(spriteSheet, 350 , 118, 58 , 29);
@@ -81,7 +81,7 @@ public class Assets
 
         font = new BitmapFont();
         font.setColor(Color.WHITE);
-        font.getData().setScale(5,5);
+        font.getData().setScale(4,5);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("audio/music.m4a"));
         music.setLooping(true);

@@ -136,7 +136,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void updateGameOver(){
-        game.setScreen(new GameOverScreen(game));
+        game.setScreen(new GameOverScreen(game, world.score));
     }
 
     @Override
