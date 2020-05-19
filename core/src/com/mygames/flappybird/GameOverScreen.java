@@ -25,7 +25,7 @@ public class GameOverScreen extends ScreenAdapter
         this.camera.position.set(Settings.VIRTUAL_WIDTH/2, Settings.VIRTUAL_HEIGHT/2, 0);
         this.viewport = new StretchViewport(Settings.VIRTUAL_WIDTH, Settings.VIRTUAL_HEIGHT, camera);
         this.scoreRect = new GameObject(Settings.VIRTUAL_WIDTH/2 - 200, Settings.VIRTUAL_HEIGHT/2 - 150, 400, 300);
-        this.buttonMenu = new GameObject(Settings.VIRTUAL_WIDTH/2 - 100, Settings.VIRTUAL_HEIGHT/2 - 50, 200, 100);
+        this.buttonMenu = new GameObject(Settings.VIRTUAL_WIDTH/2 - 50, Settings.VIRTUAL_HEIGHT/2 - 300, 100, 50);
         this.touchPoint = new Vector3();
     }
 
@@ -58,7 +58,7 @@ public class GameOverScreen extends ScreenAdapter
 
         game.batch.enableBlending();
         game.batch.begin();
-        game.batch.draw(Assets.gameOverRegion, Settings.VIRTUAL_WIDTH/2 - 150, Settings.VIRTUAL_HEIGHT/2 + 200, 300, 200);
+        game.batch.draw(Assets.gameOverRegion, Settings.VIRTUAL_WIDTH/2 - 200, Settings.VIRTUAL_HEIGHT/2 + 200, 400, 200);
 
         game.batch.draw(Assets.scoreRegion, scoreRect.position.x,
                 scoreRect.position.y,

@@ -1,9 +1,5 @@
 package com.mygames.flappybird;
 
-import java.util.List;
-import java.util.ArrayList;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.Gdx;
 import java.util.Random;
 
 public class World
@@ -36,10 +32,10 @@ public class World
     public World(){
 
         bird  = new Bird(Settings.VIRTUAL_HEIGHT / 2);
-
         ground = new Ground();
 
         speedLevel = 4;
+
         rand = new Random();
         randomSpaceBetweenPipes = rand.nextInt(400) - 200;
 
@@ -53,7 +49,6 @@ public class World
         pipeNorth = new Pipe(pipePosInitX, pipeNorthPosY);
 
         this.state = WORLD_STATE_RUNNING;
-
         this.score = 0;
     }
 
@@ -78,11 +73,13 @@ public class World
         ground.update(speedLevel);
 
         pipePosX = pipePosX - speedLevel;
-
     }
 
     public void update(float deltaTime, float mY){
         generateLevel(deltaTime);
+
+        // bird jump
+        bird.fly(deltaTime, mY);
 
         // checkCollisions
         bird.checkColisionGround(ground);
@@ -91,8 +88,6 @@ public class World
 
         //checkGameOver
         gameOver();
-
-        bird.fly(deltaTime, mY);
     }
 
     private void gameOver(){

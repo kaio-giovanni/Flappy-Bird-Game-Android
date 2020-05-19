@@ -2,6 +2,7 @@ package com.mygames.flappybird;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.Gdx;
@@ -74,6 +75,15 @@ public class GameScreen extends ScreenAdapter {
             state = GAME_OVER;
     }
 
+    private void updateGameOver(){
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                game.setScreen(new GameOverScreen(game, world.score));
+            }
+        }, 1.5f);
+    }
+
     public void render(){
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
@@ -133,10 +143,6 @@ public class GameScreen extends ScreenAdapter {
                     Settings.VIRTUAL_WIDTH /2 - 200,
                     Settings.VIRTUAL_HEIGHT/2 + 200, 400, 200);
         }
-    }
-
-    private void updateGameOver(){
-        game.setScreen(new GameOverScreen(game, world.score));
     }
 
     @Override

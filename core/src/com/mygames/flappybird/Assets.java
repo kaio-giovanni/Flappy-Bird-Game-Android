@@ -68,13 +68,13 @@ public class Assets
         menuMainRegion        = new TextureRegion(spriteSheet, 462 , 26 , 40 , 13);
 
         pipeSouthRegion       = new TextureRegion(spriteSheet, 84  , 322, 26 , 161);
-        pipeNorthRegion       = new TextureRegion(spriteSheet, 56  , 322, 26 , 160);
+        pipeNorthRegion       = new TextureRegion(spriteSheet, 56  , 322, 26 , 161);
 
         bird = new TextureRegion[3];
 
-        bird[0]               = new TextureRegion(spriteSheet, 3   , 491, 18 , 13);
-        bird[1]               = new TextureRegion(spriteSheet, 31  , 491, 18 , 13);
-        bird[2]               = new TextureRegion(spriteSheet, 59  , 491, 18 , 13);
+        bird[0]               = new TextureRegion(spriteSheet, 3   , 491, 18 , 12);
+        bird[1]               = new TextureRegion(spriteSheet, 31  , 491, 18 , 12);
+        bird[2]               = new TextureRegion(spriteSheet, 59  , 491, 18 , 12);
 
         medalGold             = new TextureRegion(spriteSheet, 120 , 281, 24 , 24);
         medalSilver           = new TextureRegion(spriteSheet, 120 , 258, 24 , 24);
