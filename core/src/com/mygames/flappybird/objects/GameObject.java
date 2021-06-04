@@ -1,11 +1,10 @@
-package com.mygames.flappybird;
+package com.mygames.flappybird.objects;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
 
-public class GameObject
-{
-    Vector2 position;
-    Rectangle bounds;
+public class GameObject {
+    private final Vector2 position;
+    private final Rectangle bounds;
 
     public GameObject(float x, float y, float width, float height){
         this.position = new Vector2(x, y);
@@ -15,5 +14,13 @@ public class GameObject
     public void setPosition(float x, float y){
         position.set(x, y);
         bounds.setPosition(position);
+    }
+
+    public Vector2 getPosition() {
+        return this.position;
+    }
+
+    public Rectangle getBounds() {
+        return this.bounds;
     }
 }

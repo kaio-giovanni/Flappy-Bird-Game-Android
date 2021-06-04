@@ -1,5 +1,4 @@
-package com.mygames.flappybird;
-import com.badlogic.gdx.Gdx;
+package com.mygames.flappybird.config;
 
 public class Settings
 {
@@ -7,6 +6,14 @@ public class Settings
 
     public static final float VIRTUAL_WIDTH = 768;
     public static final float VIRTUAL_HEIGHT = 1024;
+    public static final float SCORE_RECT_WIDTH = 400;
+    public static final float SCORE_RECT_HEIGHT = 300;
+    public static final float SCORE_RECT_POS_X = VIRTUAL_WIDTH/2 - 200;
+    public static final float SCORE_REACT_POS_Y = VIRTUAL_HEIGHT/2 - 150;
+    public static final float BUTTON_MENU_WIDTH = 100;
+    public static final float BUTTON_MENU_HEIGHT = 50;
+    public static final float BUTTON_MENU_POS_X = VIRTUAL_WIDTH/2 - 50;
+    public static final float BUTTON_MENU_POS_Y = VIRTUAL_HEIGHT/2 - 300;
 
     public static int[] highscores = {5,4,3,2,1};
 

@@ -2,9 +2,12 @@ package com.mygames.flappybird;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygames.flappybird.config.Assets;
+import com.mygames.flappybird.config.Settings;
+import com.mygames.flappybird.screens.MainMenuScreen;
 
 public class FlappyBird extends Game {
-	SpriteBatch batch;
+	private SpriteBatch batch;
 
 	@Override
 	public void create () {
@@ -22,6 +25,9 @@ public class FlappyBird extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
+	}
 
+	public SpriteBatch getGameBatch() {
+		return batch;
 	}
 }
