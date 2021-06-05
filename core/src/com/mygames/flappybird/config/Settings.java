@@ -34,7 +34,6 @@ public class Settings {
     }
 
     public void saveRecord(Long record) {
-        System.out.println("Entroooooooooooooooou");
         for(int index = 0; index < topRecords.length; index++) {
             if(record > topRecords[index]) {
                 String key = String.format("record%s", index + 1);
