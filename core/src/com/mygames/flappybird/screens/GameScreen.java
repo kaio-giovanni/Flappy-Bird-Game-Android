@@ -113,12 +113,12 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void renderPipes() {
-        game.getGameBatch().draw(Assets.pipeNorthRegion, world.getPipeTop().getBounds().x,
+        game.getGameBatch().draw(Assets.pipeTopRegion, world.getPipeTop().getBounds().x,
                 world.getPipeTop().getBounds().y,
                 world.getPipeTop().getBounds().getWidth(),
                 world.getPipeTop().getBounds().getHeight());
 
-        game.getGameBatch().draw(Assets.pipeSouthRegion, world.getPipeBottom().getBounds().x,
+        game.getGameBatch().draw(Assets.pipeBottomRegion, world.getPipeBottom().getBounds().x,
                 world.getPipeBottom().getBounds().y,
                 world.getPipeBottom().getBounds().getWidth(),
                 world.getPipeBottom().getBounds().getHeight());
