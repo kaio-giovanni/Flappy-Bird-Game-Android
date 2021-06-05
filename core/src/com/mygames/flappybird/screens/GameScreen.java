@@ -66,7 +66,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void updateRunning(float deltaTime) {
         world.update(deltaTime, jump_bird);
-        jump_bird++;
+        jump_bird+=0.9f;
 
         if (Gdx.input.justTouched()) {
             jump_bird = -1 * world.getBirdJump();

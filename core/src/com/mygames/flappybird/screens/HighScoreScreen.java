@@ -10,27 +10,42 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygames.flappybird.FlappyBird;
 import com.mygames.flappybird.config.Assets;
 import com.mygames.flappybird.config.Settings;
+import com.mygames.flappybird.objects.GameObject;
 
 public class HighScoreScreen extends ScreenAdapter {
-    private FlappyBird game;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-    private Vector3 touchPoint;
+    private final FlappyBird game;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
+    private final Vector3 touchPoint;
+    private final GameObject buttonMenu;
+    private final long[] records;
 
     public HighScoreScreen(FlappyBird game) {
         this.game = game;
         this.camera = new OrthographicCamera();
         this.camera.position.set(Settings.VIRTUAL_WIDTH / 2, Settings.VIRTUAL_HEIGHT / 2, 0);
         this.viewport = new StretchViewport(Settings.VIRTUAL_WIDTH, Settings.VIRTUAL_HEIGHT, camera);
+        this.buttonMenu = new GameObject(Settings.BUTTON_MENU_POS_X, Settings.BUTTON_MENU_POS_Y,
+                Settings.BUTTON_MENU_WIDTH, Settings.BUTTON_MENU_HEIGHT);
         this.touchPoint = new Vector3();
+        this.records = new Settings().load();
     }
 
     public void update() {
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            // button back main menu touched
+
+            if (buttonMenu.getBounds().contains(touchPoint.x, touchPoint.y)) {
+                Assets.playSound(Assets.clickSound);
+                game.setScreen(new MainMenuScreen(game));
+            }
         }
     }
+
+    private String getRecords() {
+        return "1.    " + records[0] + "Pts\n" + "2.    " + records[1] + "Pts\n" + "3.    " + records[2] + "Pts\n";
+    }
+
 
     public void draw() {
         GL20 gl = Gdx.gl;
@@ -47,6 +62,18 @@ public class HighScoreScreen extends ScreenAdapter {
         game.getGameBatch().end();
 
         // draw highScores
+
+        game.getGameBatch().enableBlending();
+        game.getGameBatch().begin();
+
+        Assets.font.draw(game.getGameBatch(), getRecords(), Settings.VIRTUAL_WIDTH/2 - 100, 800);
+
+        game.getGameBatch().draw(Assets.menuMainRegion, buttonMenu.getPosition().x,
+                buttonMenu.getPosition().y,
+                buttonMenu.getBounds().getWidth(),
+                buttonMenu.getBounds().getHeight());
+
+        game.getGameBatch().end();
     }
 
     @Override

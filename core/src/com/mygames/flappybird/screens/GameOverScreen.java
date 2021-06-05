@@ -13,15 +13,16 @@ import com.mygames.flappybird.config.Settings;
 import com.mygames.flappybird.objects.GameObject;
 
 public class GameOverScreen extends ScreenAdapter {
-    private FlappyBird game;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-    private GameObject buttonMenu;
-    private GameObject scoreRect;
-    private Vector3 touchPoint;
-    private int score;
+    private final FlappyBird game;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
+    private final GameObject buttonMenu;
+    private final GameObject scoreRect;
+    private final Vector3 touchPoint;
+    private final Long score;
+    private final Settings settings;
 
-    public GameOverScreen(FlappyBird game, int score) {
+    public GameOverScreen(FlappyBird game, Long score) {
         this.game = game;
         this.score = score;
         this.camera = new OrthographicCamera();
@@ -32,6 +33,8 @@ public class GameOverScreen extends ScreenAdapter {
         this.buttonMenu = new GameObject(Settings.BUTTON_MENU_POS_X, Settings.BUTTON_MENU_POS_Y,
                 Settings.BUTTON_MENU_WIDTH, Settings.BUTTON_MENU_HEIGHT);
         this.touchPoint = new Vector3();
+
+        this.settings = new Settings();
     }
 
     public void update() {
@@ -39,6 +42,7 @@ public class GameOverScreen extends ScreenAdapter {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             if (buttonMenu.getBounds().contains(touchPoint.x, touchPoint.y)) {
+                settings.saveRecord(score);
                 Assets.playSound(Assets.clickSound);
                 game.setScreen(new MainMenuScreen(game));
             }

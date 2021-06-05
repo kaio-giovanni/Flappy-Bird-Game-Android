@@ -20,7 +20,7 @@ public class World {
     private float pipeNorthPosY;
     private float speedLevel;
     private int worldState;
-    private int score;
+    private long score;
     private int randomSpace;
 
     public World() {
@@ -49,7 +49,7 @@ public class World {
         gameOver();
     }
 
-    public int getScore() {
+    public long getScore() {
         return score;
     }
 
@@ -101,7 +101,7 @@ public class World {
 
 
     private float getPipeNorthPosY(int randomSpace) {
-        return Settings.VIRTUAL_HEIGHT/2 + SPACE_BETWEEN_PIPES/2 + randomSpace;
+        return Settings.VIRTUAL_HEIGHT / 2 + SPACE_BETWEEN_PIPES / 2 + randomSpace;
     }
 
     private float getPipeSouthPosY(int randomSpace) {

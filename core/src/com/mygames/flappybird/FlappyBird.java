@@ -12,7 +12,6 @@ public class FlappyBird extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		Settings.load();
 		Assets.load();
 		setScreen(new MainMenuScreen(this));
 	}
