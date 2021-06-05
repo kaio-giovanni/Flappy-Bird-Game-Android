@@ -12,32 +12,37 @@ public class Bird extends DynamicGameObject {
     private float indexTexture;
     private int birdState;
 
-    public Bird(float y) {
-        super(BIRD_POS_X, y, BIRD_WIDTH, BIRD_HEIGHT);
-        setVelocity(0, y);
-        birdState = BIRD_FLYING;
-        indexTexture = 0;
+    public Bird(float posY) {
+        super(BIRD_POS_X, posY, BIRD_WIDTH, BIRD_HEIGHT);
+        setVelocity(0, posY);
+        this.birdState = BIRD_FLYING;
+        this.indexTexture = 0;
     }
 
-    public void fly(float deltaTime, float mY) {
+    public void fly(float deltaTime, float deltaY) {
         if (isFlying()) {
-            float velocity = this.getVelocity().y - mY;
-            setVelocity(0, velocity);
-            setPosition(BIRD_POS_X, velocity);
-            indexTexture += deltaTime * 8;
-
-            if (indexTexture > 2)
-                indexTexture = 0;
+            float jump = getVelocity().y - deltaY;
+            setVelocity(0, jump);
+            setPosition(BIRD_POS_X, jump);
+            updateIndexTexture(deltaTime);
         }
     }
 
-    public void checkColisionGround(Ground ground) {
+    private void updateIndexTexture(float deltaTime) {
+        indexTexture += deltaTime * 8;
+
+        if (indexTexture > 2) {
+            indexTexture = 0;
+        }
+    }
+
+    public void checkCollisionGround(Ground ground) {
         if (getBounds().overlaps(ground.getBounds())) {
             birdState = BIRD_FALL;
         }
     }
 
-    public void checkColisionPipe(Pipe pipe) {
+    public void checkCollisionPipe(Pipe pipe) {
         if (getBounds().overlaps(pipe.getBounds()))
             birdState = BIRD_FALL;
     }

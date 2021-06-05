@@ -9,31 +9,31 @@ public class World {
     private static final int WORLD_STATE_GAME_OVER = 3;
     private static final int SPACE_BETWEEN_PIPES = 200;
 
-    private final Bird bird;
+    private final Bird player;
     private final Ground ground;
-    private final Pipe pipeNorth;
-    private final Pipe pipeSouth;
+    private final Pipe pipeTop;
+    private final Pipe pipeBottom;
 
-    private float pipePosInitX;
-    private float pipePosX;
-    private float pipeSouthPosY;
-    private float pipeNorthPosY;
+    private float pipeInitialPositionX;
+    private float pipePositionX;
+    private float pipeBottomPositionY;
+    private float pipeTopPositionY;
     private float speedLevel;
     private int worldState;
     private long score;
     private int randomSpace;
 
     public World() {
-        bird = new Bird(Settings.VIRTUAL_HEIGHT / 2);
+        player = new Bird(Settings.VIRTUAL_HEIGHT / 2);
         ground = new Ground();
         randomSpace = Utils.getRandomNumberByInterval(400) - 200;
-        pipeNorthPosY = getPipeNorthPosY(randomSpace);
-        pipeSouthPosY = getPipeSouthPosY(randomSpace);
-        pipePosInitX = Settings.VIRTUAL_WIDTH;
-        pipePosX = pipePosInitX;
+        pipeTopPositionY = getPipeBottomPositionY(randomSpace);
+        pipeBottomPositionY = getPipeTopPositionY(randomSpace);
+        pipeInitialPositionX = Settings.VIRTUAL_WIDTH;
+        pipePositionX = Settings.VIRTUAL_WIDTH;
 
-        pipeSouth = new Pipe(pipePosInitX, pipeSouthPosY);
-        pipeNorth = new Pipe(pipePosInitX, pipeNorthPosY);
+        pipeBottom = new Pipe(pipeInitialPositionX, pipeBottomPositionY);
+        pipeTop = new Pipe(pipeInitialPositionX, pipeTopPositionY);
         speedLevel = 4;
         worldState = WORLD_STATE_RUNNING;
         score = 0;
@@ -41,10 +41,10 @@ public class World {
 
     public void update(float deltaTime, float mY) {
         generateLevel(deltaTime);
-        bird.fly(deltaTime, mY);
-        bird.checkColisionGround(ground);
-        bird.checkColisionPipe(pipeSouth);
-        bird.checkColisionPipe(pipeNorth);
+        player.fly(deltaTime, mY);
+        player.checkCollisionGround(ground);
+        player.checkCollisionPipe(pipeBottom);
+        player.checkCollisionPipe(pipeTop);
 
         gameOver();
     }
@@ -58,19 +58,19 @@ public class World {
     }
 
     public float getBirdJump() {
-        return bird.getBirdJump();
+        return player.getBirdJump();
     }
 
-    public Bird getBird() {
-        return bird;
+    public Bird getPlayer() {
+        return player;
     }
 
-    public Pipe getPipeNorth() {
-        return pipeNorth;
+    public Pipe getPipeTop() {
+        return pipeTop;
     }
 
-    public Pipe getPipeSouth() {
-        return pipeSouth;
+    public Pipe getPipeBottom() {
+        return pipeBottom;
     }
 
     public Ground getGround() {
@@ -78,13 +78,13 @@ public class World {
     }
 
     private void generateLevel(float deltaTime) {
-        if (pipePosX < -Pipe.PIPE_WIDTH) {
-            pipePosX = pipePosInitX;
+        if (pipePositionX < -Pipe.PIPE_WIDTH) {
+            pipePositionX = pipeInitialPositionX;
 
             randomSpace = Utils.getRandomNumberByInterval(400) - 200;
 
-            pipeNorthPosY = getPipeNorthPosY(randomSpace);
-            pipeSouthPosY = getPipeSouthPosY(randomSpace);
+            pipeTopPositionY = getPipeBottomPositionY(randomSpace);
+            pipeBottomPositionY = getPipeTopPositionY(randomSpace);
 
             speedLevel += speedLevel * deltaTime * 5;
             if (speedLevel > 10) {
@@ -93,23 +93,23 @@ public class World {
             score++;
         }
 
-        pipeNorth.setPosition(pipePosX, pipeNorthPosY);
-        pipeSouth.setPosition(pipePosX, pipeSouthPosY);
+        pipeTop.setPosition(pipePositionX, pipeTopPositionY);
+        pipeBottom.setPosition(pipePositionX, pipeBottomPositionY);
         ground.update(speedLevel);
-        pipePosX = pipePosX - speedLevel;
+        pipePositionX = pipePositionX - speedLevel;
     }
 
 
-    private float getPipeNorthPosY(int randomSpace) {
+    private float getPipeBottomPositionY(int randomSpace) {
         return Settings.VIRTUAL_HEIGHT / 2 + SPACE_BETWEEN_PIPES / 2 + randomSpace;
     }
 
-    private float getPipeSouthPosY(int randomSpace) {
+    private float getPipeTopPositionY(int randomSpace) {
         return Settings.VIRTUAL_HEIGHT / 2 - Pipe.PIPE_HEIGHT - SPACE_BETWEEN_PIPES / 2 + randomSpace;
     }
 
     private void gameOver() {
-        if (bird.isFall()) {
+        if (player.isFall()) {
             worldState = WORLD_STATE_GAME_OVER;
         }
     }
