@@ -21,17 +21,17 @@ public class GameScreen extends ScreenAdapter {
     private final Viewport viewport;
     private final OrthographicCamera camera;
     private final World world;
-    private float jump_bird;
+    private float playerJump;
     private int gameState;
 
     public GameScreen(FlappyBird game) {
         this.game = game;
-        gameState = GAME_READY;
-        world = new World();
-        jump_bird = 0;
-        camera = new OrthographicCamera();
-        camera.position.set(Settings.VIRTUAL_WIDTH / 2, Settings.VIRTUAL_HEIGHT / 2, 0);
-        viewport = new StretchViewport(Settings.VIRTUAL_WIDTH, Settings.VIRTUAL_HEIGHT, camera);
+        this.playerJump = 0;
+        this.gameState = GAME_READY;
+        this.world = new World();
+        this.camera = new OrthographicCamera();
+        this.camera.position.set(Settings.VIRTUAL_WIDTH / 2, Settings.VIRTUAL_HEIGHT / 2, 0);
+        this.viewport = new StretchViewport(Settings.VIRTUAL_WIDTH, Settings.VIRTUAL_HEIGHT, camera);
     }
 
     private void update(float deltaTime) {
@@ -65,11 +65,11 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void updateRunning(float deltaTime) {
-        world.update(deltaTime, jump_bird);
-        jump_bird+=0.9f;
+        world.update(deltaTime, playerJump);
+        playerJump += 0.9f;
 
         if (Gdx.input.justTouched()) {
-            jump_bird = -1 * world.getBirdJump();
+            playerJump = -1 * world.getBirdJump();
         }
 
         if (world.isGameOver()) {
@@ -113,22 +113,22 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void renderPipes() {
-        game.getGameBatch().draw(Assets.pipeNorthRegion, world.getPipeNorth().getBounds().x,
-                world.getPipeNorth().getBounds().y,
-                world.getPipeNorth().getBounds().getWidth(),
-                world.getPipeNorth().getBounds().getHeight());
+        game.getGameBatch().draw(Assets.pipeNorthRegion, world.getPipeTop().getBounds().x,
+                world.getPipeTop().getBounds().y,
+                world.getPipeTop().getBounds().getWidth(),
+                world.getPipeTop().getBounds().getHeight());
 
-        game.getGameBatch().draw(Assets.pipeSouthRegion, world.getPipeSouth().getBounds().x,
-                world.getPipeSouth().getBounds().y,
-                world.getPipeSouth().getBounds().getWidth(),
-                world.getPipeSouth().getBounds().getHeight());
+        game.getGameBatch().draw(Assets.pipeSouthRegion, world.getPipeBottom().getBounds().x,
+                world.getPipeBottom().getBounds().y,
+                world.getPipeBottom().getBounds().getWidth(),
+                world.getPipeBottom().getBounds().getHeight());
     }
 
     private void renderBird() {
-        game.getGameBatch().draw(Assets.bird[(int) world.getBird().getIndexTexture()], world.getBird().getBounds().x,
-                world.getBird().getBounds().y,
-                world.getBird().getBounds().getWidth(),
-                world.getBird().getBounds().getHeight());
+        game.getGameBatch().draw(Assets.bird[(int) world.getPlayer().getIndexTexture()], world.getPlayer().getBounds().x,
+                world.getPlayer().getBounds().y,
+                world.getPlayer().getBounds().getWidth(),
+                world.getPlayer().getBounds().getHeight());
     }
 
     private void renderGround() {

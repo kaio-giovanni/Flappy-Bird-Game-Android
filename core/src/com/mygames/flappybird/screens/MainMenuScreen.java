@@ -13,26 +13,23 @@ import com.mygames.flappybird.config.Settings;
 import com.mygames.flappybird.objects.GameObject;
 
 public class MainMenuScreen extends ScreenAdapter {
-    private FlappyBird game;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-    private GameObject playBounds;
-    private GameObject highScoresBounds;
-    private Vector3 touchPoint;
+    private final FlappyBird game;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
+    private final GameObject playBounds;
+    private final GameObject highScoresBounds;
+    private final Vector3 touchPoint;
 
     public MainMenuScreen(FlappyBird game) {
         this.game = game;
-
-        camera = new OrthographicCamera();
-        camera.position.set(Settings.VIRTUAL_WIDTH / 2, Settings.VIRTUAL_HEIGHT / 2, 0);
-        viewport = new StretchViewport(Settings.VIRTUAL_WIDTH, Settings.VIRTUAL_HEIGHT, camera);
-
-        playBounds = new GameObject(Settings.VIRTUAL_WIDTH / 2 - 100, Settings.VIRTUAL_HEIGHT / 2 - 50,
+        this.camera = new OrthographicCamera();
+        this.camera.position.set(Settings.VIRTUAL_WIDTH / 2, Settings.VIRTUAL_HEIGHT / 2, 0);
+        this.viewport = new StretchViewport(Settings.VIRTUAL_WIDTH, Settings.VIRTUAL_HEIGHT, camera);
+        this.playBounds = new GameObject(Settings.VIRTUAL_WIDTH / 2 - 100, Settings.VIRTUAL_HEIGHT / 2 - 50,
                 200, 100);
-        highScoresBounds = new GameObject(Settings.VIRTUAL_WIDTH / 2 - 100, Settings.VIRTUAL_HEIGHT / 2 - 180,
+        this.highScoresBounds = new GameObject(Settings.VIRTUAL_WIDTH / 2 - 100, Settings.VIRTUAL_HEIGHT / 2 - 180,
                 200, 100);
-
-        touchPoint = new Vector3();
+        this.touchPoint = new Vector3();
     }
 
     public void update() {
