@@ -3,7 +3,6 @@ package com.mygames.flappybird;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygames.flappybird.config.Assets;
-import com.mygames.flappybird.config.Settings;
 import com.mygames.flappybird.screens.MainMenuScreen;
 
 public class FlappyBird extends Game {
